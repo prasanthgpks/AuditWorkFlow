@@ -1,0 +1,34 @@
+﻿@using AuditWorkFlow.Core.Models.Dtos
+@using Microsoft.AspNetCore.Mvc.Rendering.TagHelpers
+
+@Model List<CustomerDto>
+
+<h1>Customers</h1>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        
+        <table style="border: solid 1px">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Pan Number</th>                    
+            </thead>
+            <tbody>
+                @foreach(var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.LastName</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.PhoneNumber</td>
+                        <td>@customer.PanNumber</td>
+                    </tr>
+                }
+        </table>
+    }
+
+    
