@@ -21,7 +21,7 @@ namespace AuditWorkFlow.Razor.Models.Domain
         [MaxLength(150)]
         public string PanNumber { get; set; }
         [DefaultValue(1)]
-        public int Status { get; set; }
+        public int StatusCode { get; set; }
 
     }
 }

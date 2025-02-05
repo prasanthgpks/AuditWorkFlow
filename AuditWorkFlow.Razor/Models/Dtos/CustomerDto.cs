@@ -15,5 +15,9 @@
         public string PhoneNumber { get; set; }
 
         public string PanNumber { get; set; }
+
+        public int StatusCode { get; set; }
+
+        public string Status { get; set; }
     }
 }

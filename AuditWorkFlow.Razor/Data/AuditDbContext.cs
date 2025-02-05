@@ -12,7 +12,7 @@ namespace AuditWorkFlow.Razor.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>()
-                .Property(a => a.Status)
+                .Property(a => a.StatusCode)
                 .HasDefaultValue("1");
 
             modelBuilder.Entity<Customer>()
@@ -26,7 +26,7 @@ namespace AuditWorkFlow.Razor.Data
                                     CountryCode = "+91",
                                     PhoneNumber = "9292929292",
                                     PanNumber = "testpan001",
-                                    Status = 1
+                                    StatusCode = 1
                                 },
                                     new Customer {
                                     Id = Guid.Parse("f51fdf1b-aee9-441f-9ed5-1877ac407cc9"),
@@ -36,7 +36,7 @@ namespace AuditWorkFlow.Razor.Data
                                     CountryCode = "+91",
                                     PhoneNumber = "898989898",
                                     PanNumber = "testpan002",
-                                    Status = 1
+                                    StatusCode = 1
                                 }
                 });
 
