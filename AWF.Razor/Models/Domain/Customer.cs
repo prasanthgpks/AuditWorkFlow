@@ -20,5 +20,8 @@ namespace AWF.Razor.Models.Domain
         [MaxLength(150)]
         public string PanNumber { get; set; }
 
+        public Enums.Common.FileStatus FileStatus { get; set; }
+
+
     }
 }

@@ -11,6 +11,8 @@ namespace AWF.Razor.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Customer>().Property(c => c.FileStatus).HasConversion<int>();
+
             modelBuilder.Entity<Customer>()
                 .HasData(new List<Customer>()
                             {
@@ -21,7 +23,8 @@ namespace AWF.Razor.Data
                                     Email = "prad@gmail.com",
                                     CountryCode = "+91",
                                     PhoneNumber = "9292929292",
-                                    PanNumber = "testpan001"
+                                    PanNumber = "testpan001",
+                                    FileStatus = Models.Enums.Common.FileStatus.Active
                                 },
                                     new Customer {
                                     Id = Guid.Parse("f51fdf1b-aee9-441f-9ed5-1877ac407cc9"),
@@ -30,7 +33,8 @@ namespace AWF.Razor.Data
                                     Email = "prav@gmail.com",
                                     CountryCode = "+91",
                                     PhoneNumber = "898989898",
-                                    PanNumber = "testpan002"
+                                    PanNumber = "testpan002",
+                                    FileStatus = Models.Enums.Common.FileStatus.Inprogress
                                 }
                 });
 

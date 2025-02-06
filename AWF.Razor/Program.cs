@@ -10,9 +10,12 @@ namespace AWF.Razor
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+
             builder.Services.AddDbContext<AuditDbContext>
                     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("AuditWf")));
+
+            builder.Services.AddRazorPages();
+            
 
             var app = builder.Build();
 
