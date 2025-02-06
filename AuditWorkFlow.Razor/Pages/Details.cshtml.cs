@@ -43,7 +43,7 @@ namespace AuditWorkFlow.Razor.Pages
             {
                 CustomerDto = mapper.Map<CustomerDto>(customer);
 
-                CustomerDto.Status = typeof(Models.Enums.Common.StatusCodes).GetEnumName(CustomerDto.Status);
+                CustomerDto.Status = Enum.GetName(typeof(AuditWorkFlow.Razor.Models.Enums.Common.StatusCodes), customer.StatusCode);
 
             }
             return Page();

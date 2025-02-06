@@ -15,31 +15,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].FirstName)
+                @Html.DisplayNameFor(model => model.CustomerDtos[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].LastName)
+                @Html.DisplayNameFor(model => model.CustomerDtos[0].LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Email)
+                @Html.DisplayNameFor(model => model.CustomerDtos[0].Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].CountryCode)
+                @Html.DisplayNameFor(model => model.CustomerDtos[0].CountryCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].PhoneNumber)
+                @Html.DisplayNameFor(model => model.CustomerDtos[0].PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].PanNumber)
+                @Html.DisplayNameFor(model => model.CustomerDtos[0].PanNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Status)
+                @Html.DisplayNameFor(model => model.CustomerDtos[0].StatusCode)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Customer) {
+@foreach (var item in Model.CustomerDtos) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -60,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.PanNumber)
             </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @Html.DisplayFor(modelItem => item.StatusCode)
                 </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

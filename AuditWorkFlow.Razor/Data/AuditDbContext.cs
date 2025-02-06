@@ -26,7 +26,9 @@ namespace AuditWorkFlow.Razor.Data
                                     CountryCode = "+91",
                                     PhoneNumber = "9292929292",
                                     PanNumber = "testpan001",
-                                    StatusCode = 1
+                                    StatusCode = 1,
+                                    Status = ""
+
                                 },
                                     new Customer {
                                     Id = Guid.Parse("f51fdf1b-aee9-441f-9ed5-1877ac407cc9"),
@@ -36,7 +38,8 @@ namespace AuditWorkFlow.Razor.Data
                                     CountryCode = "+91",
                                     PhoneNumber = "898989898",
                                     PanNumber = "testpan002",
-                                    StatusCode = 1
+                                    StatusCode = 1,
+                                    Status = ""
                                 }
                 });
 

@@ -7,23 +7,33 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AuditWorkFlow.Razor.Data;
 using AuditWorkFlow.Razor.Models.Domain;
+using AuditWorkFlow.Razor.Repositories.Abstractions;
+using AutoMapper;
+using AuditWorkFlow.Razor.Models.Dtos;
 
 namespace AuditWorkFlow.Razor.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly AuditWorkFlow.Razor.Data.AuditDbContext _context;
+        private readonly ICustomerRepository customerRepository;
+        private readonly IMapper mapper;
 
-        public IndexModel(AuditWorkFlow.Razor.Data.AuditDbContext context)
+        public IndexModel(ICustomerRepository _customerRepository, IMapper _mapper)
         {
-            _context = context;
+
+            customerRepository = _customerRepository;
+            mapper = _mapper;
         }
 
-        public IList<Customer> Customer { get;set; } = default!;
+        public IList<Customer> Customers { get;set; } = default!;
+
+        public IList<CustomerDto> CustomerDtos { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Customer = await _context.Customers.ToListAsync();
+            Customers = await customerRepository.GetCustomersAsync();
+
+            CustomerDtos = Customers.Select(c => mapper.Map<CustomerDto>(c)).ToList();
         }
     }
 }

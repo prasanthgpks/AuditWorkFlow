@@ -8,20 +8,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AuditWorkFlow.Razor.Data;
 using AuditWorkFlow.Razor.Models.Domain;
+using AuditWorkFlow.Razor.Repositories.Abstractions;
+using AutoMapper;
+using AuditWorkFlow.Razor.Models.Dtos;
 
 namespace AuditWorkFlow.Razor.Pages
 {
     public class EditModel : PageModel
     {
-        private readonly AuditWorkFlow.Razor.Data.AuditDbContext _context;
+        private readonly ICustomerRepository customerRepository;
+        private readonly IMapper mapper;
 
-        public EditModel(AuditWorkFlow.Razor.Data.AuditDbContext context)
+        public EditModel(ICustomerRepository _customerRepository, IMapper _mapper)
         {
-            _context = context;
+            customerRepository = _customerRepository;
+            mapper = _mapper;
         }
 
         [BindProperty]
-        public Customer Customer { get; set; } = default!;
+        public CustomerDto CustomerDto { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -30,12 +35,13 @@ namespace AuditWorkFlow.Razor.Pages
                 return NotFound();
             }
 
-            var customer =  await _context.Customers.FirstOrDefaultAsync(m => m.Id == id);
+            var customer = await customerRepository.GetByIdAsync(id.Value);
             if (customer == null)
             {
                 return NotFound();
             }
-            Customer = customer;
+            CustomerDto = mapper.Map<CustomerDto>(customer);
+
             return Page();
         }
 
@@ -48,11 +54,9 @@ namespace AuditWorkFlow.Razor.Pages
                 return Page();
             }
 
-            _context.Attach(Customer).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                
             }
             catch (DbUpdateConcurrencyException)
             {

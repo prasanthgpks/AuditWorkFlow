@@ -7,25 +7,33 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AuditWorkFlow.Razor.Data;
 using AuditWorkFlow.Razor.Models.Domain;
+using AuditWorkFlow.Razor.Models.Dtos;
+using AuditWorkFlow.Razor.Repositories.Abstractions;
+using AutoMapper;
+using AuditWorkFlow.Razor.Repositories;
 
 namespace AuditWorkFlow.Razor.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly AuditWorkFlow.Razor.Data.AuditDbContext _context;
+        private readonly ICustomerRepository customerRepository;
+        private readonly IMapper mapper;
 
-        public CreateModel(AuditWorkFlow.Razor.Data.AuditDbContext context)
+        public CreateModel(ICustomerRepository _customerRepository, IMapper _mapper)
         {
-            _context = context;
+            customerRepository = _customerRepository;
+            mapper = _mapper;
         }
+        [BindProperty]
+        public CustomerDto CustomerDto { get; set; } = default!;       
 
         public IActionResult OnGet()
         {
             return Page();
         }
 
-        [BindProperty]
-        public Customer Customer { get; set; } = default!;
+        //[BindProperty]
+        //public Customer Customer { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -34,9 +42,8 @@ namespace AuditWorkFlow.Razor.Pages
             {
                 return Page();
             }
-
-            _context.Customers.Add(Customer);
-            await _context.SaveChangesAsync();
+            var id = customerRepository.AddCustomerAsync(mapper.Map<Customer>(CustomerDto));
+            
 
             return RedirectToPage("./Index");
         }

@@ -23,5 +23,7 @@ namespace AuditWorkFlow.Razor.Models.Domain
         [DefaultValue(1)]
         public int StatusCode { get; set; }
 
+        public string Status { get; set; }
+
     }
 }

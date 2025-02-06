@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuditWorkFlow.Razor.Migrations
 {
     [DbContext(typeof(AuditDbContext))]
-    [Migration("20250203160127_initial")]
+    [Migration("20250205064341_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -61,7 +61,11 @@ namespace AuditWorkFlow.Razor.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("Status")
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusCode")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
@@ -80,7 +84,8 @@ namespace AuditWorkFlow.Razor.Migrations
                             LastName = "Gandham",
                             PanNumber = "testpan001",
                             PhoneNumber = "9292929292",
-                            Status = 1
+                            Status = "",
+                            StatusCode = 1
                         },
                         new
                         {
@@ -91,7 +96,8 @@ namespace AuditWorkFlow.Razor.Migrations
                             LastName = "Gandham",
                             PanNumber = "testpan002",
                             PhoneNumber = "898989898",
-                            Status = 1
+                            Status = "",
+                            StatusCode = 1
                         });
                 });
 #pragma warning restore 612, 618
